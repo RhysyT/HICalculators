@@ -100,7 +100,7 @@ if st.checkbox('Calculate integrated S/N'):
 			#st.write("Velocity resolution = ", vres, ' in km/s')
 		
 		# Width unit, row 2
-		wunit = st.selectbox('Line width resolution units', ('km/s', 'm/s'), key="wunitk")
+		wunit = st.selectbox('Line width units', ('km/s', 'm/s'), key="wunitk")
 	
 		if wunit == 'm/s':
 			w50 = w50 / 1000.0
