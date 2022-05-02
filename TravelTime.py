@@ -151,10 +151,10 @@ if st.checkbox('Calculate average speed'):
 				
 	with right_column:
 		# Distance unit widget, row 1 
-		distunit_fs = st.selectbox('Distance unit', ('m', 'pc', 'kpc', 'Mpc'), index=2, key="munitfortime")
+		distunit_fs = st.selectbox('Distance unit', ('m', 'pc', 'kpc', 'Mpc'), index=2, key="munitforspeed")
 
 		# Time unit widget, row 2 
-		timeunit_fs = st.selectbox('Time unit', ('Seconds', 'Years', 'Myrs', 'Gyrs'), index=2, key="tunitfordist")
+		timeunit_fs = st.selectbox('Time unit', ('Seconds', 'Years', 'Myrs', 'Gyrs'), index=2, key="tunitforspeed")
 
 	# Get into SI units
 	if distunit_fs == 'm':
