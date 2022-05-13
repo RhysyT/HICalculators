@@ -230,7 +230,9 @@ if hirad > 0.0:	# Avoid divide by zero error
 
 	st.write("#### HI column density = ",nicenumber(nhi_atomssqcm),' atoms per square cm, or ', nicenumber(ni_msolsqpc),' in solar masses per square parsec.') 
 	st.write('Exact values are',nhi_atomssqcm,'in atoms per sq. cm and',ni_msolsqpc,'in solar masses per sq. pc.')
-	
+
+# The mass conversion option is only available in the telescope parameter mode
+if opmode == 'Telescope parameters':	
 	if st.session_state['domassconvert'] == True:
 		st.write("#### Total HI mass = ", nicenumber(himass), 'in solar masses')
 	
