@@ -108,8 +108,8 @@ st.write('##### Total flux = ',topflux,' in Jy km/s')
 
 topmass = 2.36E5 * disttop*disttop * topflux
 tophimasskg = topmass*1.98847E30
-st.write("#### Total HI mass = ", nicenumber(topmass),' in solar masses, or ', nicenumber(tophimasskg),' in kg.') 
-st.write('Exact values are',topmass,'in solar masses and',tophimasskg,'in kg.')
+st.write("#### Total HI mass = ", nicenumber(topmass),'M<sub style="font-size:60%">&#8857;</sub>, or ', nicenumber(tophimasskg),'kg.', unsafe_allow_html=True) 
+st.write('Exact values are',topmass,'M<sub style="font-size:60%">&#8857;</sub> and',tophimasskg,'kg.', unsafe_allow_html=True)
 	
 if totsn is not None:
 	st.write('#### Integrated S/N = ', nicenumber(totsn))
