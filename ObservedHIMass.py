@@ -119,8 +119,8 @@ if st.checkbox('Calculate integrated S/N'):
 		totsn = aasn(hiflux, w50, vres, orms)
 
 
-st.write("#### Total HI mass = ", nicenumber(himass),' in solar masses, or ', nicenumber(himasskg),' in kg.') 
-st.write('Exact values are',himass,'in solar masses and',himasskg,'in kg.')
+st.write("#### Total HI mass = ", nicenumber(himass),'M<sub style="font-size:60%">&#8857;</sub>, or ', nicenumber(himasskg),'kg.', unsafe_allow_html=True) 
+st.write('Exact values are',himass,'M<sub style="font-size:60%">&#8857;</sub> and',himasskg,'kg.', unsafe_allow_html=True)
 
 if totsn is not None:
 	st.write('#### Integrated S/N = ', nicenumber(totsn))
