@@ -228,11 +228,11 @@ if hirad > 0.0:	# Avoid divide by zero error
 	nhi_atomssqcm = hinatoms / (pi * (hiradm*100.0)**2.0)
 	ni_msolsqpc = hisolarmasses / (pi * hiradpc**2.0)
 
-	st.write("#### HI column density = ",nicenumber(nhi_atomssqcm),' atoms per square cm, or ', nicenumber(ni_msolsqpc),' in solar masses per square parsec.') 
-	st.write('Exact values are',nhi_atomssqcm,'in atoms per sq. cm and',ni_msolsqpc,'in solar masses per sq. pc.')
+	st.write("#### HI column density = ",nicenumber(nhi_atomssqcm),' atoms&thinsp;cm<sup style="font-size:60%">-2</sup>, or ', nicenumber(ni_msolsqpc),'M<sub style="font-size:60%">&#8857;</sub>&thinsp;pc<sup style="font-size:60%">-2</sup>', unsafe_allow_html=True)
+	st.write('Exact values are',nhi_atomssqcm,'in atoms&thinsp;cm<sup style="font-size:60%">-2</sup> and',ni_msolsqpc,'M<sub style="font-size:60%">&#8857;</sub>&thinsp;pc<sup style="font-size:60%">-2</sup>.', unsafe_allow_html=True)
 
 # The mass conversion option is only available in the telescope parameter mode
 if opmode == 'Telescope parameters':	
 	if st.session_state['domassconvert'] == True:
-		st.write("#### Total HI mass = ", nicenumber(himass), 'in solar masses')
+		st.write("#### Total HI mass = ", nicenumber(himass), 'in M<sub style="font-size:60%">&#8857;</sub>', unsafe_allow_html=True)
 	
