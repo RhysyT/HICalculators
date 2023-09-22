@@ -170,8 +170,8 @@ if docalc == True:
 	currentdatetime = initialdatetime
 	
 	# Now get the time zone so we can convert local times to UST
-	#tzwhere = tzwhere.tzwhere()
-	timezone_str = tzwhere.tzNameAt(latitude, longitude)
+	tz = tzwhere.tzwhere()
+	timezone_str = tz.tzNameAt(latitude, longitude)
 
 	# Create a timezone object from the region/city name
 	timezone_obj = pytz.timezone(timezone_str)
