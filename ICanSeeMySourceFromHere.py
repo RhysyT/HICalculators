@@ -12,7 +12,7 @@ import streamlit as st
 import math
 from math import pi as pi
 import imp
-from tzwhere import tzwhere
+from timezonefinder import TimezoneFinder
 import pytz
 
 # External script imported as function
@@ -170,8 +170,8 @@ if docalc == True:
 	currentdatetime = initialdatetime
 	
 	# Now get the time zone so we can convert local times to UST
-	tz = tzwhere.tzwhere()
-	timezone_str = tz.tzNameAt(latitude, longitude)
+	tf = TimezoneFinder()
+	timezone_str = tf.timezone_at(lng=longitude, lat=latitude)
 
 	# Create a timezone object from the region/city name
 	timezone_obj = pytz.timezone(timezone_str)
