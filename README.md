@@ -15,13 +15,13 @@ Available through Streamlit at https://share.streamlit.io/rhysyt/hicalculators/m
 Given the mass and size of an object (in different units), this calculates the average column density of the material. Returns the result in both atoms cm^-2 and Msolar pc^-2. Although labelled as HI, this will work equally well for anything else. Note HI tends to saturate at ~10 Msolar pc^2 and is rarely found at levels at or below 10^17 cm^-2 (the tendency of to routinely use different units for the same measurement in different contexts is one very good reason such a calculator is needed !).
 
 ## TravelTime.py<br>
-Available through Streamlit at https://share.streamlit.io/rhysyt/hicalculators/main/TravelTime.py
+Available through Streamlit at https://share.streamlit.io/rhysyt/hicalculators/main/TravelTime.py<br>
 Another useful way to conver between different units. Does simple, linear calculations of either : 1) time taken to travel a given distance at a given speed; 2) the distance travelled in a given time at a given speed; 3) the average speed to travel a given distance in a given time. Very simple, but since we generally use km/s for speed but kpc for distances, the unit conversion is handy to have.
 
 ## HIDefCal.py<br>
-Available through Streamlit at https://rhysyt-hicalculators-hidefcal-qqnsnn.streamlit.app/
+Available through Streamlit at https://rhysyt-hicalculators-hidefcal-qqnsnn.streamlit.app/<br>
 Calculates the HI deficiency of a galaxy. User provides the observed HI mass and optical diameter with a choice of units for both, as well as the morphology and coefficients from drop-down menus (a and b parameters can also be customised).
 
 ## ICanSeeMySourceFromHere.py<br>
-Available through Streamlit at https://icanseemysourcefromherepy.streamlit.app/
+Available through Streamlit at https://icanseemysourcefromherepy.streamlit.app/<br>
 Simple observing planning tool. Other tools online either provide way too much information and/or deliver mainly graphical output. This one is deliberately very simple, giving you the numerical values of the source altitude, the Sun's altitude, and the angular separation between the source and the Sun, all shown in 15 minute increments. At the end an option appears to download the data in ASCII format which has 1 minute increments. Text is coloured by the observability status, e.g. warning if the source is below the horizon, outside specified viewing angles, or too close to the Sun. Calculations use astropy.
