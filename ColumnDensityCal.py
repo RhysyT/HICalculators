@@ -41,9 +41,10 @@ pc = 3.0856775812799588E16 # 1 pc in m
 
 
 st.write("# Compute HI column density")
-st.write('### Two ways to use this tool :')
-st.write('#### 1) Unit conversion. If you know the total mass detected in a given radius, this will let you convert between standard units, e.g. atoms&thinsp;cm<sup style="font-size:60%">-2</sup> and M<sub style="font-size:60%">&#8857;</sub>&thinsp;pc<sup style="font-size:60%">-2</sup>', unsafe_allow_html=True)
-st.write('#### 2) Telescope parameters. Given the flux sensitivity, velocity resolution, and angular size, convert this directly to a column density value and (optionally) total mass. Assumes a top-hat spectral profile.') 
+st.write('Tool for estimating the HI column density of a source in two different ways :')
+st.write('**1) Unit conversion.** If you know already the total mass detected in a given radius, this will let you convert between standard units, e.g. atoms&thinsp;cm<sup style="font-size:60%">-2</sup> and M<sub style="font-size:60%">&#8857;</sub>&thinsp;pc<sup style="font-size:60%">-2</sup>', unsafe_allow_html=True)
+st.write('**2) Telescope parameters.** Given the flux sensitivity, velocity resolution, and angular size, convert this directly to a column density value and (optionally) total mass. Assumes a top-hat spectral profile.') 
+st.write('Telescope parameter mode is the more interesting to explore - sensitivity can vary in unintuitive ways, especially bearing in mind that rms and beam size are not independent.')
 
 # Radio buttons are toggles, can only choose one option at a time. Much easier for selecting mutually exclusive
 # options than checkboxes !
@@ -55,7 +56,7 @@ if opmode == 'Unit conversion':
 
 	with left_column:
 		# HI flux number widget, row 1
-		himass = st.number_input("Total HI mass", format="%.3f", key="mass")
+		himass = st.number_input("Total HI mass", format="%.3f", key="mass", help='Total HI mass detected in the appropriate units')
 		
 	with right_column:
 		# Mass unit widget, row 1 (adjacent to flux widget)
@@ -69,7 +70,7 @@ if opmode == 'Unit conversion':
 	
 	with lcol:
 		# Size number widget	
-		sizenum = st.number_input("Size of the HI", format="%.3f", key="size")
+		sizenum = st.number_input("Size of the HI", format="%.3f", key="size", help='Size of the HI detected. If not known, use the beam size of the telescope to give a lower limit for the colum density')
 
 	with mcol:
 		# Choose between radius and diameter for the size
@@ -92,7 +93,7 @@ if opmode == 'Telescope parameters':
 		rms = st.number_input("Spectra rms noise", format="%.3f", key="rms")
 			
 		# Line width, row 2
-		lw = st.number_input("Line width (i.e. channel resolution)", format="%.3f", key="lw")
+		lw = st.number_input("Line width (i.e. channel resolution)", format="%.3f", key="lw", help='Enter the measured line width when dealing with a measured source, or the survey resolution when calculating sensitivty limits')
 		
 					
 	with right_column:
@@ -105,7 +106,7 @@ if opmode == 'Telescope parameters':
 	# Optionally convert to total mass as well
 	dist = 1.0
 	distunit = 'Mpc'
-	if st.checkbox('Convert to mass', key='domassconvert'):
+	if st.checkbox('Convert to mass', key='domassconvert', help='Optionally also calculate the total mass'):
 		with left_column:
 			dist = st.number_input("Distance to the source", value=1.0, key="dists")
 			
@@ -118,7 +119,7 @@ if opmode == 'Telescope parameters':
 	
 	with lcol:
 		# Size number widget	
-		sizenum = st.number_input("Angular beam size", format="%.3f", key="absize")
+		sizenum = st.number_input("Angular beam size", format="%.3f", key="absize", help='Telescope beam size. Assumes the source fills the beam')
 
 	with mcol:
 		# Choose between radius and diameter for the size
@@ -129,7 +130,7 @@ if opmode == 'Telescope parameters':
 		sizeunit = st.selectbox('Size unit', ('Degrees', 'Arcminutes', 'Arcseconds'), index=1, key="sunit")
 		
 	# Without columns
-	snr = st.number_input("S/N", format="%.3f", key="snrk")	
+	snr = st.number_input("S/N", format="%.3f", key="snrk", help='S/N level of the source (flux / rms)')	
 	
 	
 	# We can now convert to all the standardised parameters
@@ -228,11 +229,11 @@ if hirad > 0.0:	# Avoid divide by zero error
 	nhi_atomssqcm = hinatoms / (pi * (hiradm*100.0)**2.0)
 	ni_msolsqpc = hisolarmasses / (pi * hiradpc**2.0)
 
-	st.write("#### HI column density = ",nicenumber(nhi_atomssqcm),' atoms&thinsp;cm<sup style="font-size:60%">-2</sup>, or ', nicenumber(ni_msolsqpc),'M<sub style="font-size:60%">&#8857;</sub>&thinsp;pc<sup style="font-size:60%">-2</sup>', unsafe_allow_html=True)
-	st.write('Exact values are',nhi_atomssqcm,'in atoms&thinsp;cm<sup style="font-size:60%">-2</sup> and',ni_msolsqpc,'M<sub style="font-size:60%">&#8857;</sub>&thinsp;pc<sup style="font-size:60%">-2</sup>.', unsafe_allow_html=True)
+	st.write("#### HI column density = "+str(nicenumber(nhi_atomssqcm))+'&thinsp;atoms&thinsp;cm<sup style="font-size:60%">-2</sup>, or '+str(nicenumber(ni_msolsqpc))+'&thinsp;M<sub style="font-size:60%">&#9737;</sub>&thinsp;pc<sup style="font-size:60%">-2</sup>', unsafe_allow_html=True) 
+	st.write('Exact values are '+str(nhi_atomssqcm)+'&thinsp;atoms&thinsp;cm<sup style="font-size:60%">-2</sup> and '+str(ni_msolsqpc)+'&thinsp;M<sub style="font-size:60%">&#8857;</sub>&thinsp;pc<sup style="font-size:60%">-2</sup>.', unsafe_allow_html=True)
+
 
 # The mass conversion option is only available in the telescope parameter mode
 if opmode == 'Telescope parameters':	
 	if st.session_state['domassconvert'] == True:
-		st.write("#### Total HI mass = ", nicenumber(himass), 'in M<sub style="font-size:60%">&#8857;</sub>', unsafe_allow_html=True)
-	
+		st.write("#### Total HI mass = "+str(nicenumber(himass))+'&thinsp;M<sub style="font-size:60%">&#9737;</sub>', unsafe_allow_html=True)
