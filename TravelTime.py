@@ -38,7 +38,7 @@ myr = 365.0*24.0*3600.0*1000000.0 # 1 Myr in seconds
 
 
 st.write("# Compute travel time")
-st.write('#### Calculate time, speed, or distance travelled, depending on input parameters, in astronomy-friendly units.')
+st.write('Calculates time, speed, or distance travelled, depending on input parameters, in astronomy-friendly units.')
 
 
 if st.checkbox('Calculate travel time'):
@@ -88,7 +88,7 @@ if st.checkbox('Calculate travel time'):
 	
 	
 		st.write("#### Time taken = ", nicenumber(myrtime_ft),' in Myr, or ', nicenumber(sitime_ft),' in seconds.') 
-		st.write('Exact values are',myrtime_ft,'in Myr and',sitime_ft,'in seconds.')
+		st.write('Exact values are '+str(myrtime_ft)+' in Myr and '+str(sitime_ft)+' in seconds.')
 
 
 if st.checkbox('Calculate distance travelled'):
@@ -135,7 +135,7 @@ if st.checkbox('Calculate distance travelled'):
 	stnddist_fd = sidist_fd / (1000.0*pc)
 			
 	st.write("#### Distance travelled = ", nicenumber(stnddist_fd),' in kpc, or ', nicenumber(sidist_fd),' in metres.') 
-	st.write('Exact values are',stnddist_fd,'in kpc and',sidist_fd,'in metres.')
+	st.write('Exact values are '+str(stnddist_fd)+' in kpc and '+str(sidist_fd)+' in metres.')
 
 
 if st.checkbox('Calculate average speed'):
@@ -188,4 +188,4 @@ if st.checkbox('Calculate average speed'):
 		stnspeed = (distance_fs/ (1000.0*pc)) / (sitime_fs / myr)
 		
 		st.write("#### Average speed = ", nicenumber(sispeed),' in km/s, or ', nicenumber(stnspeed),' kpc/Myr.') 	
-		st.write('Exact values are',sispeed,'in km/s and',stnspeed,'in kpc/Myr.')
+		st.write('Exact values are '+str(sispeed)+' in km/s and '+str(stnspeed)+' in kpc/Myr.')
