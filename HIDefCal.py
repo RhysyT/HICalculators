@@ -41,24 +41,21 @@ pc = 3.0856775812799588E16 # 1 pc in m
 
 
 st.write("# Compute HI deficiency")
-st.write('### Provide the HI mass and (optionally) morphology. Use preset values for the a/b parameters, or specify your own.')
+st.write('Calculates the HI deficiency of a galaxy given its observed HI mass and optical diameter. Calculates the expected HI mass from a variety of preset coeffecients for morphology, or you can set your own.')
+st.write('Expected HI mass is calculated by the equation :')
+st.latex(r'''M_{HI} = a + b.log_{10}(d)''')
+st.write('Where d is the optical diameter in kpc. HI deficiency is calculated as :')
+st.latex(r'''HI_{def} = log_{10}(MHI_{expected}) - log_{10}(MHI_{observed})''')
 
 
-#HI mass				MassUnitDropdown
-#Morphology 
-#PresetDropdown 	a		b
-
-
-
-	
 left_column, right_column = st.columns(2)
 
 with left_column:
 	# HI flux number widget, row 1
-	himass = st.number_input("Total HI mass", format="%.3f", key="mass")
+	himass = st.number_input("Observed HI mass", format="%.3f", key="mass", help='Enter observed HI mass in the appropriate unit. Since deficiency is a logarithmic parameter, enter a small value for the case of zero HI mass')
 	
 	# Optical diameter number widget, row 2
-	optd25 = st.number_input("Optical diameter", format="%.3f", key="od")
+	optd25 = st.number_input("Optical diameter", format="%.3f", key="od", help='Optical diameter of the galaxy, usually defined as the Holmberg diameter at which the surface brightness is 26.5 mag per square arcsecond')
 		
 with right_column:
 	# Mass unit widget, row 1 (adjacent to flux widget)
@@ -69,30 +66,43 @@ with right_column:
 
 
 # Column-independent dropdown for morphology
-mtypechoice = st.selectbox('Morphology', ('Early', 'Sa, Sab', 'Sb', 'Sbc', 'Sc', 'Scd', 'Sd', 'Sdm, Sm', 'Im', 'Later (generally >= Scd)', 'General'), index=10, key="htype")
+mtypechoice = st.selectbox('Morphology', ('Early', 'Sa, Sab', 'Sb', 'Sbc', 'Sc', 'Scd', 'Sd', 'Sdm, Sm', 'Im', 'Later (generally >= Scd)', 'General'), index=10, key="htype", help='Choose the morphology of the galaxy. Different groups have derived slightly different coefficients for the different morphologies')
 
 
-#with right_column:
-	# On the second row we need three columns of unequal width. The first will be the numerical size of the HI, the second the 
-	# specification of radius or diameter, and the third the unit
-	# Providing a list of numbers (instead of a single number) sets the size ratio of each column
+
+# On the second row we need three columns of unequal width. The first will be the numerical size of the HI, the second the 
+# specification of radius or diameter, and the third the unit
+# Providing a list of numbers (instead of a single number) sets the size ratio of each column
 
 lcol, mcol, rcol = st.columns([2,1,1])
+
 	
 with lcol:
 	# Morphology parameter selection box
-	mparams = st.selectbox("Use preset or custom parameters", ('Haynes & Giovanelli 1984', 'Solanes et al. 1996', 'Gavazzi et al. 2005', 'Custom'), index=0, key="type")
+	mparams = st.selectbox("Use preset or custom parameters", ('Haynes & Giovanelli 1984', 'Solanes et al. 1996', 'Gavazzi et al. 2005', 'Custom'), index=0, key="type", help='Choose whichever set of preset morphology coefficients you like best, or set your own')
+
+# Set the coefficient dictionaries depending on the current choice of parameter catalogue
+if mparams == 'Haynes & Giovanelli 1984':
+	mvalues = {'Early':[6.88, 0.89*2.0], 'Sa, Sab':[6.88, 0.89*2.0], 'Sb':[7.17, 0.82*2.0], 'Sbc':[7.17, 0.82*2.0], 'Sc':[7.29, 0.83*2.0], 'Scd':[7.27, 0.85*2.0], 'Sd':[6.91, 0.95*2.0], 'Sdm, Sm':[7.0, 0.94*2.0], 'Im':[7.75, 0.66*2.0], 'Later (generally >= Scd)':[7.75, 0.66*2.0], 'General':[7.12, 0.88*2.0]} 
+	
+if mparams == 'Solanes et al. 1996':
+	mvalues = {'Early':[0.0, 0.0], 'Sa, Sab':[7.75, 1.19], 'Sb':[7.82, 1.25], 'Sbc':[7.84, 1.22], 'Sc':[7.16, 1.74], 'Scd':[7.16, 1.74], 'Sd':[7.16, 1.74], 'Sdm, Sm':[7.16, 1.74], 'Im':[7.16, 1.74], 'Later (generally >= Scd)':[7.16, 1.74], 'General':[7.51, 1.46]} 
+	
+if mparams == 'Gavazzi et al. 2005':
+	mvalues = {'Early':[0.0, 0.0], 'Sa, Sab':[7.29, 1.66], 'Sb':[7.27, 1.70], 'Sbc':[6.91, 1.90], 'Sc':[7.00, 1.88], 'Scd':[7.00, 1.88], 'Sd':[7.00, 1.88], 'Sdm, Sm':[7.00, 1.88], 'Im':[7.00, 1.88], 'Later (generally >= Scd)':[7.00, 1.88], 'General':[7.16, 1.64]} 
+
+if mparams == 'Custom':
+	mvalues = {'Early':[0.0, 0.0], 'Sa, Sab':[0.0, 0.0], 'Sb':[0.0, 0.0], 'Sbc':[0.0, 0.0], 'Sc':[0.0, 0.0], 'Scd':[0.0, 0.0], 'Sd':[0.0, 0.0], 'Sdm, Sm':[0.0, 0.0], 'Im':[0.0, 0.0], 'Later (generally >= Scd)':[0.0, 0.0], 'General':[0.0, 0.0]} 	
+
 
 with mcol:
 	# A parameter number widger
-	aparam = st.number_input("a", format="%.3f", key="keya")	
+	aparam = st.number_input("a", format="%.3f", value=mvalues[mtypechoice][0], key="keya", help='Coefficient "a" used in the predicted HI mass equation')	
 	
 with rcol:
 	# B parameter number widger
-	bparam = st.number_input("b", format="%.3f", key="keyb")
+	bparam = st.number_input("b", format="%.3f", value=mvalues[mtypechoice][1], key="keyb", help='Coefficient "b" used in the predicted HI mass equation')
 
-
-# *** DONE UP TO THIS BIT ! ***
 
 
 # First convert the mass into linear solar units :
@@ -122,123 +132,24 @@ if optdunit == 'kpc':
 	
 if optdunit == 'Mpc':
 	optd = optd25 / 1000000.0
-
-
-# Set the a and b parameters	
-if mparams == 'Custom':
-	a = aparam
-	b = bparam
-	
-
-if mparams == 'Haynes & Giovanelli 1984':	
-	if mtypechoice == 'Early':
-		a = 6.88
-		b = 0.89*2.0
-
-	if mtypechoice == 'Sa, Sab':
-		a = 6.88
-		b = 0.89*2.0	
-			
-	if mtypechoice == 'Sb':
-		a = 7.17
-		b = 0.82*2.0
-
-	if mtypechoice == 'Sbc':
-		a = 7.17
-		b = 0.82*2.0
-		
-	if mtypechoice == 'Sc':
-		a = 7.29
-		b = 0.83*2.0
-		
-	if mtypechoice == 'Scd':
-		a = 7.27
-		b = 0.85*2.0
-	
-	if mtypechoice == 'Sd':
-		a = 6.91
-		b = 0.95
-	
-	if mtypechoice == 'Sdm, Sm':
-		a = 7.0
-		b = 0.94*2.0
-	
-	if mtypechoice == 'Im' or mtypechoice == 'Later (generally >= Scd)':
-		a = 7.75
-		b = 0.66		
-		
-	if mtypechoice == 'General':
-		a = 7.12
-		b = 0.88*2.0
-	
-	
-if mparams == 'Solanes et al. 1996':
-	if mtypechoice == 'Early':
-		a = None
-		b = None
-		
-	if mtypechoice == 'Sa, Sab':
-		a = 7.75
-		b = 1.19
-		
-	if mtypechoice == 'Sb':
-		a = 7.82
-		b = 1.25
-
-	if mtypechoice == 'Sbc':
-		a = 7.84
-		b = 1.22
-
-	if mtypechoice == 'Sc' or mtypechoice == 'Scd' or mtypechoice == 'Sdm, Sm' or mtypechoice == 'Im' or mtypechoice == 'Later (generally >= Scd)':
-		a = 7.16
-		b = 1.74
-		
-	if mtypechoice == 'General':
-		a = 7.51
-		b = 1.46
-	
-			
-if mparams == 'Gavazzi et al. 2005':
-	if mtypechoice == 'Early':
-		a = None
-		b = None
-		
-	if mtypechoice == 'Sa, Sab':
-		a = 7.29
-		b = 1.66
-		
-	if mtypechoice == 'Sb':
-		a = 7.27
-		b = 1.70
-
-	if mtypechoice == 'Sbc':
-		a = 6.91
-		b = 1.90
-
-	if mtypechoice == 'Sc' or mtypechoice == 'Scd' or mtypechoice == 'Sdm, Sm' or mtypechoice == 'Im' or mtypechoice == 'Later (generally >= Scd)':
-		a = 7.00
-		b = 1.88
-		
-	if mtypechoice == 'General':
-		a = 7.16
-		b = 1.64
 	
 
 # As long as a and b are defined, we can now calculate the expected HI mass and so get the deficiency
-if a is not None and b is not None and optd is not None:
+# (Parameters are always defined, this is a throwback to an earlier version but no harm in it)
+if aparam is not None and bparam is not None and optd is not None:
+	# As long as the optical diameter is set, we can predict the HI mass
 	if optd > 0.0:
-		MHI_exp = a + b*math.log10(optd)
+		MHI_exp = aparam + bparam*math.log10(optd)
+		st.write("#### Expected HI mass = "+nicenumber(10.0**MHI_exp)+'&thinsp;M<sub style="font-size:60%">&#9737;</sub>, or '+nicenumber(MHI_exp), "in logarithmic units", unsafe_allow_html=True)
+	
+	# To give the HI deficiency requires the observed HI mass was also set, to the positive finite value
+	if hisolarmasses > 0.0 and optd > 0.0:	
 		HIdef = MHI_exp - loghimass
-		st.write("#### Expected HI mass =",nicenumber(10.0**MHI_exp),"solar masses, or",nicenumber(MHI_exp), "in logarithmic units")
 		st.write("#### HI deficiency =",nicenumber(HIdef))
 		if mparams == 'Custom':
-			st.write('Used the custom parameter values a='+str(a)+' and b='+str(b))
+			st.write('Used the custom parameter values a='+str(aparam)+' and b='+str(bparam))
 		if mparams != 'Custom':
-			st.write('Used the preset parameter values a='+str(a)+' and b='+str(b))
-		
-
-# TO DO : FIND MORE A AND B VALUES
-
+			st.write('Used the preset parameter values a='+str(aparam)+' and b='+str(bparam))
 
 
 	
