@@ -147,6 +147,9 @@ if aparam is not None and bparam is not None and optd is not None:
 	if hisolarmasses > 0.0 and optd > 0.0:	
 		HIdef = MHI_exp - loghimass
 		st.write("#### HI deficiency =",nicenumber(HIdef))
+		if HIdef > 0.0:
+			gasremainingpercent = 100.0 / 10.0**HIdef
+			st.write('This galaxy has '+str(nicenumber(gasremainingpercent))+' % of its likely original gas content.')
 		if mparams == 'Custom':
 			st.write('Used the custom parameter values a='+str(aparam)+' and b='+str(bparam))
 		if mparams != 'Custom':
