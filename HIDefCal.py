@@ -41,12 +41,12 @@ pc = 3.0856775812799588E16 # 1 pc in m
 
 
 st.write("# Compute HI deficiency")
-st.write('Calculates the HI deficiency of a galaxy given its observed HI mass and optical diameter. Calculates the expected HI mass from a variety of preset coeffecients for morphology, or you can set your own.')
+st.write('Calculates the HI deficiency of a galaxy given its observed HI mass and optical diameter. Calculates the expected HI mass from a variety of preset coeffecients for morphology, or you can set your own. If only the optical diameter is provided, it will just calculate the expected mass and not the deficiency.')
 st.write('Expected HI mass is calculated by the equation :')
 st.latex(r'''M_{HI} = a + b.log_{10}(d)''')
 st.write('Where d is the optical diameter in kpc. HI deficiency is calculated as :')
 st.latex(r'''HI_{def} = log_{10}(MHI_{expected}) - log_{10}(MHI_{observed})''')
-st.write('Note that the intrinsic scatter on HI deficiency is +/- ~0.3-0.4 so quoting precise values is pointless. Really all you can say is that : <br> If def < -0.3, the galaxy is negatively deficient, having more gas than expected <br> If -0.3 < def < +0.3, the galaxy is non-deficient, having a typical gas content <br> If 0.3 < def < 0.6 the galaxy is modestly deficient, having lost some gas <br> If def > 0.6, the galaxy is strongly deficient.')
+st.write('Note that the intrinsic scatter on HI deficiency is +/- ~0.3-0.4 so quoting precise values is pointless. Really all you can say is that : <br> If **def < -0.3**, the galaxy is negatively deficient, having more gas than expected <br> If **-0.3 < def < +0.3**, the galaxy is non-deficient, having a typical gas content <br> If **0.3 < def < 0.6** the galaxy is modestly deficient, having lost some gas <br> If **def > 0.6**, the galaxy is strongly deficient.', unsafe_allow_html=True)
 
 
 left_column, right_column = st.columns(2)
