@@ -116,7 +116,7 @@ with left_column4:
 	minsangle  = st.number_input("Min. elevation / deg", format="%.2f", min_value=0.0, max_value=90.0, key="minsangle", help='Here you can specify the minimum elevation angle of the source above the horizon to be observable, independent of the telescope limits')
 	
 with leftmid_column:
-	st.write('######')	# Empty padding so the button appears level
+	st.write('#####')	# Empty padding so the button appears level
 	nameresolve = st.button("Resolve", type="primary", help='Try and resolve the sky coordinates of the source', use_container_width=True)
 	
 	# We have to do the operation of the name resolve button here (or at least before the coordinate boxes are drawn) to update the dictionary properly
