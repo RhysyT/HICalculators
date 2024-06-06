@@ -135,7 +135,7 @@ with rightmid_column:
 	
 with right_column4:
 	sourcedeccoord = st.number_input("Source Dec / J2000", format="%.6f", min_value=-90.0, max_value=90.0, value=st.session_state['sourcecoords']['Galaxy'][1], key="sourcedeccoord")
-	st.write('####')	# Empty padding so the button appears level
+	st.write('######')	# Empty padding so the button appears level
 	docalc = st.button("Calculate", type="primary", help='Find out if you can see your source from here !', use_container_width=True)
 
 
