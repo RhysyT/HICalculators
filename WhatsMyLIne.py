@@ -183,7 +183,7 @@ st.write('Enter the numerical value of the observed frequency, wavelength, veloc
 left_column, mid_column, right_column = st.columns(3)
 
 with left_column:
-	obsvalue = st.number_input("Observed value", format="%.6f", min_value = 0.0, value=1420405750.000000, key="lineobsvalue", step=1.0, help='Specify the numerical value of the observed frequency, wavelength, or redshift, according to the menus on the right')
+	obsvalue = st.number_input("Observed value", format="%.6f", value=1420405750.000000, key="lineobsvalue", step=1.0, help='Specify the numerical value of the observed frequency, wavelength, or redshift, according to the menus on the right')
 
 with mid_column:
 	obstype = st.selectbox('Observed unit type', ('Frequency', 'Wavelength', 'Redshift', 'Optical velocity', 'Radio velocity', 'Relativistic velocity'), key="obstype", help='Choose whether the observed value refers to frequency, wavelength, or redshift')
