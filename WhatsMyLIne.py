@@ -383,7 +383,8 @@ if inpunitmatch == True:
 			st.write('Redshifted **radio** velocity :',str(obsradvel))
 			st.write('Redshifted **relativisitic** velocity :',str(obsrelvel))
 			st.write('Redshift :',str(redshift))
-			st.write('Redshifted wavelength :',str(redwave),'m')			
+			st.write('Redshifted wavelength :',str(redwave),'m')
+			st.write('Redshifted frequency :',str(fobs.value),'Hz')
 		
 		
 		# D) Redshifted value is radio velocity
