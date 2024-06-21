@@ -334,6 +334,7 @@ if inpunitmatch == True:
 			st.write('Redshifted **relativisitic** velocity :',str(obsrelvel))			
 			st.write('Redshift :',str(redshift))			
 			st.write('Redshifted wavelength :',str(redwave),'m')
+			st.write('Redshifted frequency :',str(obsfrq),'Hz')
 			
 	
 		# B) Redshifted value is wavelength 
@@ -352,6 +353,7 @@ if inpunitmatch == True:
 			st.write('Redshifted **relativisitic** velocity :',str(obsrelvel))
 			st.write('Redshift :',str(redshift))
 			st.write('Redshifted wavelength :',str(redwave),'m')
+			st.write('Redshifted frequency :',str(redwfrq.value),'Hz')
 			
 			
 		# C) Redshifted value is redshift
@@ -365,6 +367,7 @@ if inpunitmatch == True:
 			st.write('Redshifted **relativisitic** velocity :',str(obsrelvel))
 			st.write('Redshift :',str(redshift))
 			st.write('Redshifted wavelength :',str(redwave),'m')
+			st.write('Redshifted frequency :',str(redfrq),'Hz')
 		
 		
 		# D) Redshifted value is optical velocity
@@ -387,7 +390,7 @@ if inpunitmatch == True:
 			st.write('Redshifted frequency :',str(fobs.value),'Hz')
 		
 		
-		# D) Redshifted value is radio velocity
+		# E) Redshifted value is radio velocity
 		if obstype == 'Radio velocity' and obsunits in ['m/s', 'km/s']:
 			if obsunits == 'm/s':
 				fobs = -1.0*((obsvalue / c)*frqvln - frqvln)
@@ -402,9 +405,10 @@ if inpunitmatch == True:
 			st.write('Redshifted **relativisitic** velocity :',str(obsrelvel))
 			st.write('Redshift :',str(redshift))
 			st.write('Redshifted wavelength :',str(redwave),'m')
+			st.write('Redshifted frequency :',str(fobs),'Hz')
 
 		
-		# E) Redshifted value is relativistic velocity
+		# F) Redshifted value is relativistic velocity
 		if obstype == 'Relativistic velocity' and obsunits in ['m/s', 'km/s']:
 			# Let v/c = k for simplicity
 			if obsunits == 'm/s':
@@ -421,4 +425,5 @@ if inpunitmatch == True:
 			st.write('Redshifted **radio** velocity :',str(obsradvel))
 			st.write('Redshifted **relativisitic** velocity :',str(obsrelvel))
 			st.write('Redshift :',str(redshift))
-			st.write('Redshifted wavelength :',str(redwave),'m')				
+			st.write('Redshifted wavelength :',str(redwave),'m')
+			st.write('Redshifted frequency :',str(fobs),'Hz')
