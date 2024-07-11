@@ -25,3 +25,11 @@ Calculates the HI deficiency of a galaxy. User provides the observed HI mass and
 ## ICanSeeMySourceFromHere.py<br>
 Available through Streamlit at https://icanseemysourcefromherepy.streamlit.app/<br>
 Simple observing planning tool. Other tools online either provide way too much information and/or deliver mainly graphical output. This one is deliberately very simple, giving you the numerical values of the source altitude, the Sun's altitude, and the angular separation between the source and the Sun, all shown in 15 minute increments. At the end an option appears to download the data in ASCII format which has 1 minute increments. Text is coloured by the observability status, e.g. warning if the source is below the horizon, outside specified viewing angles, or too close to the Sun. Calculations use astropy.
+
+## AngularSize.py<br>
+Available through Streamlit at https://angularsizepy.streamlit.app/<br>
+A simple converter to transform angular size into linear projected size, and vice-versa, using different units. Assumes a simple Euclidian geometry, so good for the neabry Universe but not suitable for cosmology (say, z > 0.1 ?).
+
+## DynamicalMass.py<br>
+Available through Streamlit at https://dynamicalmasspy.streamlit.app/<br>
+Takes as input physical size, rotation speed, and dynamical mass. Provided exactly two of these are given it will then automatically calculate the third. Allows different units (SI and standard astronomical conventions). Designed for galaxies and ignores relativistic effects, so won't be suitable for compact objects like black holes.
