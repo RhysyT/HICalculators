@@ -19,3 +19,5 @@ from timezonefinder import TimezoneFinder
 import pytz
 
 st.write('This app is useless, but if you can see this message, you know it loaded correctly.')
+st.write('Numpy :',numpy.__version__)
+st.write('Astropy :',astropy.__version__)
