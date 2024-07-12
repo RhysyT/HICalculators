@@ -2,7 +2,7 @@
 
 import numpy
 import astropy
-from astropy.coordinates import SkyCoord, AltAz, EarthLocation, SkyCoord, Angle
+from astropy.coordinates import SkyCoord, AltAz, EarthLocation, Angle
 from astropy.time import Time
 import astropy.units as ast_u
 import datetime
