@@ -1,6 +1,6 @@
 # Program to calculate some simple parameters about source visibility, for observation planning
 
-import numpy==1.24.3
+import numpy
 import astropy
 #from astropy.coordinates import SkyCoord
 #from astropy.coordinates import AltAz 
