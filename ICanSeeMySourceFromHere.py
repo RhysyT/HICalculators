@@ -3,9 +3,9 @@
 import numpy
 import astropy
 #from astropy.coordinates import SkyCoord
-from astropy.coordinates import AltAz 
-from astropy.coordinates import EarthLocation
-from astropy.coordinates import Angle
+#from astropy.coordinates import AltAz 
+#from astropy.coordinates import EarthLocation
+#from astropy.coordinates import Angle
 from astropy.time import Time
 import astropy.units as ast_u
 import datetime
