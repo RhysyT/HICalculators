@@ -7,7 +7,7 @@ import astropy
 #from astropy.coordinates import EarthLocation
 #from astropy.coordinates import Angle
 #from astropy.time import Time
-#import astropy.units as ast_u
+import astropy.units as ast_u
 import datetime
 from datetime import date, timedelta
 import calendar
