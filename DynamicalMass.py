@@ -160,8 +160,8 @@ if non_zero_count == 2:
 		st.write('Circular speed :',nicenumber(vcir_ac),'km/s')
 	
 	# Finally, give dynamical mass in both linear and logarithmic units	
-	st.write('Dynamical mass :',nicenumber(mass_ac),'linear &thinsp;M<sub style="font-size:60%">&#8857;</sub> ('+str(nicenumber(mass_acl)+' logarithmic units)'))
-	
+	st.write('Dynamical mass :',nicenumber(mass_ac),'linear &thinsp;M<sub style="font-size:60%">&#8857;</sub> ('+str(nicenumber(mass_acl)+' logarithmic units)'), unsafe_allow_html=True)
+
 	st.write('##### Exact values in SI units :')
 	st.write('Radius :',str(r_si),'m')
 	st.write('Circular speed :',str(vcir_si),'m/s')
