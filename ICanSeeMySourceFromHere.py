@@ -1,13 +1,13 @@
 # Program to calculate some simple parameters about source visibility, for observation planning
 
-import numpy
+import numpy==1.24.3
 import astropy
 #from astropy.coordinates import SkyCoord
 #from astropy.coordinates import AltAz 
 #from astropy.coordinates import EarthLocation
 #from astropy.coordinates import Angle
-from astropy.time import Time
-import astropy.units as ast_u
+#from astropy.time import Time
+#import astropy.units as ast_u
 import datetime
 from datetime import date, timedelta
 import calendar
