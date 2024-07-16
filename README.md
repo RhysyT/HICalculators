@@ -33,3 +33,7 @@ A simple converter to transform angular size into linear projected size, and vic
 ## DynamicalMass.py<br>
 Available through Streamlit at https://dynamicalmasspy.streamlit.app/<br>
 Takes as input physical size, rotation speed, and dynamical mass. Provided exactly two of these are given it will then automatically calculate the third. Allows different units (SI and standard astronomical conventions). Designed for galaxies and ignores relativistic effects, so won't be suitable for compact objects like black holes.
+
+## PhotoCalc.py
+Available through Streamlit at https://photcalc.streamlit.app/<br>
+Converting apparent to absolute magnitude is easy, and converting absolute magnitude to stellar mass isn't difficult either. But the whole process can become a tedious chore, especially if you want to be accurate and correct for internal and foreground Galactic extinction. This app lets you enter photometric ugriz data, sky coordinates, distance, and inclindation angle of a galaxy and it handles all the rest for you. Gives stellar mass estimates using a wide variety of recipes, depending on which bands you enter.
