@@ -2,8 +2,9 @@
 Simple online HI calculations. These are mainly for my own use and for learning Streamlit. They are extremely simple, assuming flat, Euclidian geometry and do not account for any relativistic effects. These are reasonable assumptions when considering environmental-based galaxy evolution, where galaxies are not likely to move more than a few Mpc at most and travel at no (or not much) more than 1% of the speed of light. Maybe I will include some of these effects at some point, but I doubt it.
 
 The calculators are :<br><br>
-## ObservedHIMass.py<br>
-Available through Streamlit at https://share.streamlit.io/rhysyt/hicalculators/main/ObservedHIMass.py<br>
+## ~~ObservedHIMass.py~~<br>
+_Not technically in this repository anymore, see HICalculators2. I include the description and updated link here anyway._
+Available through Streamlit at [https://share.streamlit.io/rhysyt/hicalculators/main/ObservedHIMass.py](https://observedhimasspy.streamlit.app/)<br>
 Given the total HI flux and distance to a source, this calculates the HI mass. Flux units can be mJy or Jy, distance units can be pc, kpc, or Mpc. This uses the standard formula MHI = 2.36E5*d^2*SHI. Optionally, it also calculates the integrated S/N of a source according to the criteria established for ALFALFA by Saintonge 2007 (https://ui.adsabs.harvard.edu/abs/2007AJ....133.2087S/abstract). This requires the line width, the velocity resolution, and rms noise level.
 
 ## TopHatHIMass.py<br>
