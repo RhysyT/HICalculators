@@ -20,7 +20,8 @@ Available through Streamlit at [https://share.streamlit.io/rhysyt/hicalculators/
 Given the mass and size of an object (in different units), this calculates the average column density of the material. Returns the result in both atoms cm^-2 and Msolar pc^-2. Although labelled as HI, this will work equally well for anything else. Note HI tends to saturate at ~10 Msolar pc^2 and is rarely found at levels at or below 10^17 cm^-2 (the tendency of to routinely use different units for the same measurement in different contexts is one very good reason such a calculator is needed !).
 
 ## TravelTime.py<br>
-Available through Streamlit at https://share.streamlit.io/rhysyt/hicalculators/main/TravelTime.py<br>
+_Not technically in this repository anymore, see HICalculators2._
+Available through Streamlit at [https://share.streamlit.io/rhysyt/hicalculators/main/TravelTime.py](https://traveltimepy.streamlit.app/)<br>
 Another useful way to conver between different units. Does simple, linear calculations of either : 1) time taken to travel a given distance at a given speed; 2) the distance travelled in a given time at a given speed; 3) the average speed to travel a given distance in a given time. Very simple, but since we generally use km/s for speed but kpc for distances, the unit conversion is handy to have.
 
 ## HIDefCal.py<br>
