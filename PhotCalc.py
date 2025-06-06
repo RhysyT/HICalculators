@@ -160,7 +160,7 @@ def stellarmass_B03ui(Mag_u, Mag_i):
 	return Mstar
 
 
-# 8) Bell et al. 2003 relation for u-z
+# 9) Bell et al. 2003 relation for u-z
 def stellarmass_B03uz(Mag_u, Mag_z):
 	# Calculate z-band luminosity
 	Mag_solar_z = 4.51
@@ -172,7 +172,7 @@ def stellarmass_B03uz(Mag_u, Mag_z):
 	return Mstar
 
 
-# 9) Bell et al. 2003 relation for r-i
+# 10) Bell et al. 2003 relation for r-i
 def stellarmass_B03ri(Mag_r, Mag_i):
 	# Calculate i-band luminosity
 	Mag_solar_i = 4.58
@@ -184,7 +184,7 @@ def stellarmass_B03ri(Mag_r, Mag_i):
 	return Mstar
 	
 
-# 9) Bell et al. 2003 relation for r-z
+# 11) Bell et al. 2003 relation for r-z
 def stellarmass_B03rz(Mag_r, Mag_z):
 	# Calculate z-band luminosity
 	Mag_solar_z = 4.51
@@ -194,7 +194,23 @@ def stellarmass_B03rz(Mag_r, Mag_z):
 	Mstar = 10.0**(-0.124 + (1.067*(Mag_r - Mag_z)) + maths.log10(Lsolar_z))
 	
 	return Mstar	
+
+# 12) Du et al. 2020 (following O'Beirne et al. 2025) for g-i
+def stellarmass_Du(Mag_g, Mag_i):
+	# Calculate g-band luminosity
+	Mag_solar_g = 5.05	# Note this is the value used in Du, very different to others !
+	Lsolar_g = 10.0**((Mag_g - Mag_solar_g)/-2.5)
 	
+	# Calculate ratio
+	a = -1.152
+	b = 1.328
+	Upsilon = 10.0**(a + b*(Mag_g - Mag_i))
+	
+	# Stellar mass
+	Mstar = Upsilon*Lsolar_g
+	
+	return Mstar
+
 
 # STYLE
 # Remove the menu button
@@ -496,13 +512,15 @@ if True in [opticalstellarmass, uvoptclstellarmass, uvnifrdstellarmass, opnifrds
 if opticalstellarmass == True:
 	st.write('#### Optical stellar masses :')
 	
-	# 1) (g-i) from Taylor+11 and Bell+03
+	# 1) (g-i) from Taylor+11, Bell+03, and Du et al. 2020
 	if st.session_state['corr_abs_mag_g'] != 0.0 and st.session_state['corr_abs_mag_i'] != 0.0:
 		galaxy_stellar_mass_1 = stellarmass_T11(st.session_state['corr_abs_mag_g'], st.session_state['corr_abs_mag_i'])
 		galaxy_stellar_mass_2 = stellarmass_B03gi(st.session_state['corr_abs_mag_g'], st.session_state['corr_abs_mag_i'])
-	
+		galaxy_stellar_mass_3 = stellarmass_Du(st.session_state['corr_abs_mag_g'], st.session_state['corr_abs_mag_i'])
+
 		st.write('##### Stellar mass (g-i) Taylor+2011 = ', nicenumber(galaxy_stellar_mass_1),'&thinsp;M<sub style="font-size:80%">&#9737;</sub>', unsafe_allow_html=True)
 		st.write('##### Stellar mass (g-i) Bell+2003   = ', nicenumber(galaxy_stellar_mass_2),'&thinsp;M<sub style="font-size:80%">&#9737;</sub>', unsafe_allow_html=True)
+		st.write('##### Stellar mass (g-i) Du+2020   = ', nicenumber(galaxy_stellar_mass_3),'&thinsp;M<sub style="font-size:80%">&#9737;</sub>', unsafe_allow_html=True)
 		st.write('(g-i) =',nicenumber(st.session_state['corr_abs_mag_g'] - st.session_state['corr_abs_mag_i']))
 
 	# 2) (g-r) from Bell+03	
@@ -565,6 +583,6 @@ if opnifrdstellarmass == True:
 # Print additional information if any stellar mass calculation was done
 if True in [opticalstellarmass, uvoptclstellarmass, uvnifrdstellarmass, opnifrdstellarmass]:
 	st.write('### Reference Information')
-	st.write('The stellar mass calculations here follow the methods outlined in [Taylor et al. 2022](https://ui.adsabs.harvard.edu/abs/2022AJ....164..233T/abstract) and [Durbala et al. 2020](https://ui.adsabs.harvard.edu/abs/2020AJ....160..271D/abstract). The (g-i) method comes from [Taylor et al. 2011](https://ui.adsabs.harvard.edu/abs/2011MNRAS.418.1587T/abstract) while all the others are taken from [Bell et al. 2003](https://ui.adsabs.harvard.edu/abs/2003ApJS..149..289B/abstract) (table 7). The absolute magnitude of the Sun in the different bands was taken from [here](https://mips.as.arizona.edu/~cnaw/sun_2006.html).')
+	st.write('The stellar mass calculations here follow the methods outlined in [Taylor et al. 2022](https://ui.adsabs.harvard.edu/abs/2022AJ....164..233T/abstract) and [Durbala et al. 2020](https://ui.adsabs.harvard.edu/abs/2020AJ....160..271D/abstract). The (g-i) calculations come from [Taylor et al. 2011](https://ui.adsabs.harvard.edu/abs/2011MNRAS.418.1587T/abstract) and [Du et al. 2020](https://ui.adsabs.harvard.edu/abs/2020AJ....159..138D/abstract) (following [O\'Beirne et al. 2025](https://ui.adsabs.harvard.edu/abs/2025arXiv250504299O/abstract)), which is apparently based specifically on low surface brightness galaxies.  All the others are taken from [Bell et al. 2003](https://ui.adsabs.harvard.edu/abs/2003ApJS..149..289B/abstract) (table 7). The absolute magnitude of the Sun in the different bands was taken from [here](https://mips.as.arizona.edu/~cnaw/sun_2006.html).')
 	st.write('These methods are designed for normal, star-forming galaxies. They may break down for extreme objects.')
 	st.write('The Galactic extinction corrections use the models from [Schlegel, Finkbeiner & Davis 1998](https://ui.adsabs.harvard.edu/abs/1998ApJ...500..525S/abstract) and [Schlafly & Finkbeiner 2011](https://ui.adsabs.harvard.edu/abs/2011ApJ...737..103S/abstract), the standard corrections used in [NED](https://ned.ipac.caltech.edu/classic).')
