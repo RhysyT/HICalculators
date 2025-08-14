@@ -146,7 +146,7 @@ if optdunit == 'Mpc':
 
 st.write("# Essential notes")
 st.write('Values for early-type galaxies should be treated as highly uncertain. Where these are not defined in the reference papers, the calculation will not proceed.')
-st.write('Some authors also calibrate the expected HI mass using luminosity rather than diameter, but this is not used here. The Gavazzi+2013 values should be more appropriate for dwarf galaxies than the other papers.')
+st.write('Some authors also calibrate the expected HI mass using luminosity rather than diameter, but this is not used here. The Gavazzi+2013 values should be more appropriate for dwarf galaxies than the other papers. Gavazzi+2013 and Denes+2014 do not differentiate between different morphologies except to exclude early-types.')
 
 
 # As long as a and b are defined, we can now calculate the expected HI mass and so get the deficiency
