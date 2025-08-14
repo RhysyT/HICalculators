@@ -142,7 +142,12 @@ if optdunit == 'kpc':
 	
 if optdunit == 'Mpc':
 	optd = optd25 / 1000000.0
-	
+
+
+st.write("# Essential notes")
+st.write('Values for early-type galaxies should be treated as highly uncertain. Where these are not defined in the reference papers, the calculation will not proceed.')
+st.write('Some authors also calibrate the expected HI mass using luminosity rather than diameter, but this is not used here. The Gavazzi+2013 values should be more appropriate for dwarf galaxies than the other papers.')
+
 
 # As long as a and b are defined, we can now calculate the expected HI mass and so get the deficiency
 # (Parameters are always defined, this is a throwback to an earlier version but no harm in it)
