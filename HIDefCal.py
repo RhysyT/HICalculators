@@ -80,18 +80,27 @@ lcol, mcol, rcol = st.columns([2,1,1])
 	
 with lcol:
 	# Morphology parameter selection box
-	mparams = st.selectbox("Use preset or custom parameters", ('Haynes & Giovanelli 1984', 'Solanes et al. 1996', 'Gavazzi et al. 2005', 'Custom'), index=0, key="type", help='Choose whichever set of preset morphology coefficients you like best, or set your own')
+	mparams = st.selectbox("Use preset or custom parameters", ('Haynes & Giovanelli 1984', 'Solanes et al. 1996', 'Gavazzi et al. 2005', 'Gavazzi et al. 2013', 'Denes et al. 2014', 'Jones et al. 2018', 'Custom'), index=0, key="type", help='Choose whichever set of preset morphology coefficients you like best, or set your own')
 
 # Set the coefficient dictionaries depending on the current choice of parameter catalogue
 if mparams == 'Haynes & Giovanelli 1984':
 	mvalues = {'Early':[6.88, 0.89*2.0], 'Sa, Sab':[6.88, 0.89*2.0], 'Sb':[7.17, 0.82*2.0], 'Sbc':[7.17, 0.82*2.0], 'Sc':[7.29, 0.83*2.0], 'Scd':[7.27, 0.85*2.0], 'Sd':[6.91, 0.95*2.0], 'Sdm, Sm':[7.0, 0.94*2.0], 'Im':[7.75, 0.66*2.0], 'Later (generally >= Scd)':[7.75, 0.66*2.0], 'General':[7.12, 0.88*2.0]} 
 	
 if mparams == 'Solanes et al. 1996':
-	mvalues = {'Early':[0.0, 0.0], 'Sa, Sab':[7.75, 1.19], 'Sb':[7.82, 1.25], 'Sbc':[7.84, 1.22], 'Sc':[7.16, 1.74], 'Scd':[7.16, 1.74], 'Sd':[7.16, 1.74], 'Sdm, Sm':[7.16, 1.74], 'Im':[7.16, 1.74], 'Later (generally >= Scd)':[7.16, 1.74], 'General':[7.51, 1.46]} 
+	mvalues = {'Early':[None, None], 'Sa, Sab':[7.75, 1.19], 'Sb':[7.82, 1.25], 'Sbc':[7.84, 1.22], 'Sc':[7.16, 1.74], 'Scd':[7.16, 1.74], 'Sd':[7.16, 1.74], 'Sdm, Sm':[7.16, 1.74], 'Im':[7.16, 1.74], 'Later (generally >= Scd)':[7.16, 1.74], 'General':[7.51, 1.46]} 
 	
 if mparams == 'Gavazzi et al. 2005':
-	mvalues = {'Early':[0.0, 0.0], 'Sa, Sab':[7.29, 1.66], 'Sb':[7.27, 1.70], 'Sbc':[6.91, 1.90], 'Sc':[7.00, 1.88], 'Scd':[7.00, 1.88], 'Sd':[7.00, 1.88], 'Sdm, Sm':[7.00, 1.88], 'Im':[7.00, 1.88], 'Later (generally >= Scd)':[7.00, 1.88], 'General':[7.16, 1.64]} 
+	mvalues = {'Early':[None, None], 'Sa, Sab':[7.29, 1.66], 'Sb':[7.27, 1.70], 'Sbc':[6.91, 1.90], 'Sc':[7.00, 1.88], 'Scd':[7.00, 1.88], 'Sd':[7.00, 1.88], 'Sdm, Sm':[7.00, 1.88], 'Im':[7.00, 1.88], 'Later (generally >= Scd)':[7.00, 1.88], 'General':[7.16, 1.64]} 
 
+if mparams == 'Gavazzi et al. 2013':
+	mvalues = {'Early':[None, None], 'Sa, Sab':[7.51, 1.36], 'Sb':[7.51, 1.36], 'Sbc':[7.51, 1.36], 'Sc':[7.51, 1.36], 'Scd':[7.51, 1.36], 'Sd':[7.51, 1.36], 'Sdm, Sm':[7.51, 1.36], 'Im':[7.51, 1.36], 'Later (generally >= Scd)':[7.51, 1.36], 'General':[7.51, 1.36]} 
+
+if mparams == 'Denes et al. 2014':
+	mvalues = {'Early':[None, None], 'Sa, Sab':[8.21, 1.27], 'Sb':[8.21, 1.27], 'Sbc':[8.21, 1.27], 'Sc':[8.21, 1.27], 'Scd':[8.21, 1.27], 'Sd':[8.21, 1.27], 'Sdm, Sm':[8.21, 1.27], 'Im':[8.21, 1.27], 'Later (generally >= Scd)':[8.21, 1.27], 'General':[8.21, 1.27]} 
+
+if mparams == 'Jones et al. 2018':
+	mvalues = {'Early':[6.44, 2.08], 'Sa, Sab':[6.44, 2.08], 'Sb':[7.14, 1.86], 'Sbc':[7.14, 1.86], 'Sc':[7.14, 1.86], 'Scd':[7.53, 1.62], 'Sd':[7.53, 1.62], 'Sdm, Sm':[7.53, 1.62], 'Im':[7.53, 1.62], 'Later (generally >= Scd)':[7.53, 1.62], 'General':[7.30, 1.72]} 
+	
 if mparams == 'Custom':
 	mvalues = {'Early':[0.0, 0.0], 'Sa, Sab':[0.0, 0.0], 'Sb':[0.0, 0.0], 'Sbc':[0.0, 0.0], 'Sc':[0.0, 0.0], 'Scd':[0.0, 0.0], 'Sd':[0.0, 0.0], 'Sdm, Sm':[0.0, 0.0], 'Im':[0.0, 0.0], 'Later (generally >= Scd)':[0.0, 0.0], 'General':[0.0, 0.0]} 	
 
