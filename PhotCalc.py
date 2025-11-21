@@ -212,6 +212,30 @@ def stellarmass_Du(Mag_g, Mag_i):
 	return Mstar
 
 
+# Roediger & Courteau 2015 for g-r
+def stellarmass_RC15gr_BC03(Mag_g, Mag_r):
+	# Solar absolute magnitude in SDSS r band (AB)
+	Mag_solar_r = 4.76
+	
+	# r-band luminosity in solar units
+	Lsolar_r = 10.0**((Mag_r - Mag_solar_r) / -2.5)
+	
+	# g-r colour
+	colour_gr = Mag_g - Mag_r
+	
+	# Roediger & Courteau 2015 BC03 MLCR:
+	# log10(M*/L_r) = m_r * (g - r) + b_r
+	m_r = 1.629   # slope for r band, colour g-r
+	b_r = -0.792  # intercept for r band, colour g-r
+	
+	logM_over_Lr = m_r * colour_gr + b_r
+	
+	# Stellar mass in solar masses
+	Mstar = 10.0**(logM_over_Lr + maths.log10(Lsolar_r))
+	
+	return Mstar
+
+
 # STYLE
 # Remove the menu button
 st.markdown(""" <style>
