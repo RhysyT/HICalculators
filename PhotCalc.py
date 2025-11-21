@@ -231,18 +231,33 @@ def stellarmass_RC15gr_BC03(Mag_g, Mag_r):
 	logM_over_Lr = m_r * colour_gr + b_r
 	
 	# Stellar mass in solar masses
-	Mstar_meth1 = 10.0**(logM_over_Lr + maths.log10(Lsolar_r))
+	Mstar = 10.0**(logM_over_Lr + maths.log10(Lsolar_r))
+	
+	return Mstar
 
-	# Alternative method
+
+# Roediger & Courteau 2015 FSPS method
+def stellarmass_RC15gr_FSPS(Mag_g, Mag_r):
+	# Solar absolute magnitude in SDSS r band (AB)
+	Mag_solar_r = 4.76
+	
+	# r-band luminosity in solar units
+	Lsolar_r = 10.0**((Mag_r - Mag_solar_r) / -2.5)
+	
+	# g-r colour
+	colour_gr = Mag_g - Mag_r
+	
 	# Roediger & Courteau 2015 FSPS MLCR:
+	# log10(M*/L_r) = 1.497 * (g - r) - 0.647
 	m_r = 1.497
 	b_r = -0.647
 	
 	logM_over_Lr = m_r * colour_gr + b_r
 	
-	Mstar_meth2 = 10.0**(logM_over_Lr + maths.log10(Lsolar_r))
-	
-	return Mstar_meth1, Mstar_meth2
+	Mstar = 10.0**(logM_over_Lr + maths.log10(Lsolar_r))
+
+	return Mstar
+
 
 
 # STYLE
@@ -565,7 +580,9 @@ if opticalstellarmass == True:
 
 		# 2a) (g-r) from Roediger&Courteau 2018
 		galaxy_stellar_mass = stellarmass_RC15gr_BC03(st.session_state['corr_abs_mag_g'], st.session_state['corr_abs_mag_r'])
-		st.write('##### Stellar mass (g-r) Roediger&Courteau+2015   = ', nicenumber(galaxy_stellar_mass),'&thinsp;M<sub style="font-size:80%">&#9737;</sub>', unsafe_allow_html=True)
+		st.write('##### Stellar mass (g-r) Roediger&Courteau+2015 BC03   = ', nicenumber(galaxy_stellar_mass),'&thinsp;M<sub style="font-size:80%">&#9737;</sub>', unsafe_allow_html=True)
+		galaxy_stellar_mass = stellarmass_RC15gr_FSPS(st.session_state['corr_abs_mag_g'], st.session_state['corr_abs_mag_r'])
+		st.write('##### Stellar mass (g-r) Roediger&Courteau+2015 FSPS   = ', nicenumber(galaxy_stellar_mass),'&thinsp;M<sub style="font-size:80%">&#9737;</sub>', unsafe_allow_html=True)
 		st.write('(g-r) =',nicenumber(st.session_state['corr_abs_mag_g'] - st.session_state['corr_abs_mag_r']))		
 	
 	# 3) (r-i) from Bell+03
