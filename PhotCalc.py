@@ -231,9 +231,18 @@ def stellarmass_RC15gr_BC03(Mag_g, Mag_r):
 	logM_over_Lr = m_r * colour_gr + b_r
 	
 	# Stellar mass in solar masses
-	Mstar = 10.0**(logM_over_Lr + maths.log10(Lsolar_r))
+	Mstar_meth1 = 10.0**(logM_over_Lr + maths.log10(Lsolar_r))
+
+	# Alternative method
+	# Roediger & Courteau 2015 FSPS MLCR:
+	m_r = 1.497
+	b_r = -0.647
 	
-	return Mstar
+	logM_over_Lr = m_r * colour_gr + b_r
+	
+	Mstar_meth2 = 10.0**(logM_over_Lr + maths.log10(Lsolar_r))
+	
+	return Mstar_meth1, Mstar_meth2
 
 
 # STYLE
