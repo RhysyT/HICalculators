@@ -553,6 +553,11 @@ if opticalstellarmass == True:
 	
 		st.write('##### Stellar mass (g-r) Bell+2003   = ', nicenumber(galaxy_stellar_mass),'&thinsp;M<sub style="font-size:80%">&#9737;</sub>', unsafe_allow_html=True)
 		st.write('(g-r) =',nicenumber(st.session_state['corr_abs_mag_g'] - st.session_state['corr_abs_mag_r']))
+
+		# 2a) (g-r) from Roediger&Courteau 2018
+		galaxy_stellar_mass = stellarmass_RC15gr_BC03(st.session_state['corr_abs_mag_g'], st.session_state['corr_abs_mag_r'])
+		st.write('##### Stellar mass (g-r) Roediger&Courteau+2015   = ', nicenumber(galaxy_stellar_mass),'&thinsp;M<sub style="font-size:80%">&#9737;</sub>', unsafe_allow_html=True)
+		st.write('(g-r) =',nicenumber(st.session_state['corr_abs_mag_g'] - st.session_state['corr_abs_mag_r']))		
 	
 	# 3) (r-i) from Bell+03
 	if st.session_state['corr_abs_mag_r'] != 0.0 and st.session_state['corr_abs_mag_i'] != 0.0:
